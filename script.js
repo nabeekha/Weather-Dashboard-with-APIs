@@ -21,6 +21,7 @@ function getCityInfo() {
     return response.json();
 }).then(data => {
     //console logs store the city name, weather and current time
+    console.log(data)
     console.log(data.city.name);
     console.log(data.list[0].main.temp)
     console.log(data.list[0].dt_txt)
@@ -28,11 +29,10 @@ function getCityInfo() {
     displayForecastWeather(data)
 
     //call function to save the data
-    var newCityData = localStorage.getItem('cityData')
+    //var newCityData = localStorage.getItem('cityData')
     savetols(data)
-    console.log(newCityData)
+    //console.log(newCityData)
 })
-
 }
 
 //add event listener for search button click
@@ -65,22 +65,48 @@ function displayCurrentWeather(data) {
     humidContainer.appendChild(currentHumidity)
 }
 
+//create conditional statements to pick specific API call portions based on what city is searched
 function displayForecastWeather(data) {
-    var forecast = ""
+    
+    // for (i = 0)
+    // var currentCityName = document.createElement('p')
+    // currentCityName.textContent = data.city.name
+    // var cityContainer = document.getElementById('city-container')
+    // cityContainer.appendChild(currentCityName)
 
+    // //returns the current city temperature
+    // var currentWeather = document.createElement('p')
+    // currentWeather.textContent = data.list[0].main.temp
+    // var weatherContainer = document.getElementById('weather-container')
+    // weatherContainer.appendChild(currentWeather)
+
+    // //returns the current wind speed
+    // var currentWind = document.createElement('p')
+    // currentWind.textContent = data.list[0].wind.speed
+    // var windContainer = document.getElementById('wind-container')
+    // windContainer.appendChild(currentWind)
+
+    // //returns the current visibity
+    // var currentHumidity = document.createElement('p')
+    // currentHumidity.textContent = data.list[0].weather[0].description
+    // var humidContainer = document.getElementById('humidity-container')
+    // humidContainer.appendChild(currentHumidity)
 }
 
+//use localstorage elements to store the search history
 function savetols(data) {
     var input = document.getElementById('city-enter')
     var savedData = input.value
-    localStorage.setItem('cityData', data)
+    // localStorage.setItem('cityData', data)
+    var newHistoryButton = document.createElement('button')
+    newHistoryButton.textContent = savedData;
+    // newHistoryButton.value = 'cityData'
+    var newSearchHistory = document.getElementById('searchHistoryAdder')
+    newSearchHistory.appendChild(newHistoryButton)
 }
 
-//create conditional statements to pick specific API call portions based on what city is searched
 
-//use localstorage elements to store the search history
-
-//create search history buttons as a result of the event listener above
+//create search history buttons 
 
 //create event listener for search history button and pull the api history for weather again
 

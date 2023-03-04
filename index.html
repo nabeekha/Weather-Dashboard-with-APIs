@@ -15,59 +15,67 @@
 </div>
 
 <section>
-    <H2>Search for a city:</H2>
+    <H2 class="search-header">Search for a city:</H2>
     <input id="city-enter"></input>
     <button class="search-button" id="search-button">Search</button>
     <!-- card element created for the primary data display -->
     <div class="card">
         <div>
             <h2 class="city-title">City:</h2> <div class="currentResult" id="city-container"></div>
-            <div class="forecast-text">Temp:</div> <div class="currentResult" id="weather-container"></div>
-            <div class="forecast-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container"></div>
-            <div class="forecast-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container"></div>
+            <div class="current-text">Temp:</div> <div class="currentResult" id="weather-container"></div>
+            <div class="current-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container"></div>
+            <div class="current-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container"></div>
         </div>
     </div>
 
 
-<h3 class="forecast-headers">
+<h2 class="forecast-header">
     5 Day Forecast:
-</h3>
+</h2>
 
+<!-- create forecast boxes in HTML and style with the placeholder words -->
 <!-- div elements house the various squares that are going to be within the  -->
 <div class="forecast-boxes">
-    <div class="forecast-text">Temp:</div>
-    <div class="forecast-text">Wind:</div>
-    <div class="forecast-text">Humidity:</div>
+    <div class="forecast-text">Temp:</div> <div class="currentResult" id="weather-container1"></div>
+            <div class="forecast-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container1"></div>
+            <div class="forecast-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container1"></div>
 </div>
 
 <div class="forecast-boxes">
-    <div>Temp:</div>
-    <div>Wind:</div>
-    <div>Humidity:</div>
+    <div class="forecast-text">Temp:</div> <div class="currentResult" id="weather-container1"></div>
+            <div class="forecast-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container1"></div>
+            <div class="forecast-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container1"></div>
 </div>
 
 <div class="forecast-boxes">
-    <div>Temp:</div>
-    <div>Wind:</div>
-    <div>Humidity:</div>
+    <div class="forecast-text">Temp:</div> <div class="currentResult" id="weather-container1"></div>
+            <div class="forecast-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container1"></div>
+            <div class="forecast-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container1"></div>
 </div>
 
 <div class="forecast-boxes">
-    <div>Temp:</div>
-    <div>Wind:</div>
-    <div>Humidity:</div>
+    <div class="forecast-text">Temp:</div> <div class="currentResult" id="weather-container1"></div>
+            <div class="forecast-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container1"></div>
+            <div class="forecast-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container1"></div>
 </div>
 
 <div class="forecast-boxes">
-    <div>Temp:</div>
-    <div>Wind:</div>
-    <div>Humidity:</div>
+    <div class="forecast-text">Temp:</div> <div class="currentResult" id="weather-container1"></div>
+            <div class="forecast-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container1"></div>
+            <div class="forecast-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container1"></div>
 </div>
 
 
 </section>
 
-<!-- create forecast boxes in HTML and style with the placeholder words -->
+<!-- Next section for Search History -->
+<section>
+    <h2 class="forecast-header">Search History:</h2>
+    <!-- creating div element to append new search history elements to here -->
+    <div id="searchHistoryAdder">
+    </div>
+
+</section>
 
     <script src="./script.js"></script>
 </body>

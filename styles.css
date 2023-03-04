@@ -80,9 +80,20 @@
     background-color: rgb(171, 255, 255);
 }
 
+.search-header{
+    color: antiquewhite;
+    background-color: rgb(0, 64, 255);
+    width: 200px;
+    padding: 10px;
+}
+
 .forecast-header {
-    display: flex;
+    color: antiquewhite;
+    background-color: rgb(0, 64, 255);
+    width: 200px;
+    padding: 10px;
     align-content: center;
+
 }
 
 @media screen and (max-width: 768px){

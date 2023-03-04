@@ -11,7 +11,6 @@ fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df
     console.log(data.list[0].main.temp)
 })
 
-
 function saveToLS(data) {
     var input = document.getElementById('city-enter')
     var savedData = input.value
@@ -21,9 +20,10 @@ function saveToLS(data) {
         wind: data.list[0].wind.speed,
         humidity: data.list[0].weather[0].description
     }
+
     var newHistoryButton = document.createElement('button');
     newHistoryButton.textContent = savedData;
-    newHistoryButton.dataset.weather = JSON.stringify(currentWeather)
+    newHistoryButton.dataset.cityName = JSON.stringify(currentWeather)
     var newSearchHistory = document.getElementById('searchHistoryAdder');
     newSearchHistory.appendChild(newHistoryButton);
 }
@@ -31,6 +31,18 @@ function saveToLS(data) {
 
 //use search button click to return weather data 
 function getCityInfo() {
+    //clear previous results
+
+    if (searchClick) {
+    document.getElementById('city-container').innerHTML = ''
+    document.getElementById('weather-container').innerHTML = ''
+    document.getElementById('wind-container').innerHTML = ''
+    document.getElementById('humidity-container').innerHTML = ''
+}else if (historyClick) {
+        currentWeather.cityName = savedData
+        newHistoryButton.dataset.cityName = JSON.stringify(currentWeather)
+    }
+
     //intake value
     var cityEnter = document.getElementById("city-enter").value
     //use backticks to use Template Literal and create a variable that you can use 
@@ -108,7 +120,11 @@ function displayForecastWeather(data) {
 }
 
 //add event listener for search button click
-document.getElementById("search-button").addEventListener('click', getCityInfo)
+var searchClick = document.getElementById("search-button")
+searchClick.addEventListener('click', getCityInfo)
 
 //create event listener for search history button and pull the api history for weather again
-document.getElementById("searchHistoryAdder").addEventListener('click', getCityInfo)
+var historyClick = document.getElementById("searchHistoryAdder")
+historyClick.addEventListener('click', getCityInfo)
+
+

@@ -18,13 +18,13 @@
     <H2>Search for a city:</H2>
     <input id="city-enter"></input>
     <button class="search-button" id="search-button">Search</button>
-    <!-- fix this so that you are no using a card but rather a box -->
+    <!-- card element created for the primary data display -->
     <div class="card">
         <div>
-            <h2 class="city-title">City:</h2> <div id="city-container"></div>
-            <div class="forecast-text">Temp:</div> <div id="weather-container"></div>
-            <div class="forecast-text">Wind:</div>
-            <div class="forecast-text">Humidity:</div>
+            <h2 class="city-title">City:</h2> <div class="currentResult" id="city-container"></div>
+            <div class="forecast-text">Temp:</div> <div class="currentResult" id="weather-container"></div>
+            <div class="forecast-text">Wind Speed (mph):</div> <div class="currentResult" id="wind-container"></div>
+            <div class="forecast-text">Humidity/Visibility:</div> <div class="currentResult" id="humidity-container"></div>
         </div>
     </div>
 

@@ -1,4 +1,7 @@
 //test fetch function to try an individual city 
+
+var iconURL = 'http://openweathermap.org/img/wn/10d@2x.png'
+
 fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df5ca3d60632d1bcdcd637c38`)
 .then(response => {
     return response.json();
@@ -48,6 +51,18 @@ function displayCurrentWeather(data) {
     currentWeather.textContent = data.list[0].main.temp
     var weatherContainer = document.getElementById('weather-container')
     weatherContainer.appendChild(currentWeather)
+
+    //returns the current wind speed
+    var currentWind = document.createElement('p')
+    currentWind.textContent = data.list[0].wind.speed
+    var windContainer = document.getElementById('wind-container')
+    windContainer.appendChild(currentWind)
+
+    //returns the current visibity
+    var currentHumidity = document.createElement('p')
+    currentHumidity.textContent = data.list[0].weather[0].description
+    var humidContainer = document.getElementById('humidity-container')
+    humidContainer.appendChild(currentHumidity)
 }
 
 function displayForecastWeather(data) {

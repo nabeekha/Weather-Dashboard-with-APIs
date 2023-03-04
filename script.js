@@ -17,12 +17,17 @@ function getCityInfo() {
 .then(response => {
     return response.json();
 }).then(data => {
-    //console logs store the city name, weather
+    //console logs store the city name, weather and current time
     console.log(data.city.name);
-    console.log()
+    console.log(data.list[0].main.temp)
+    console.log(data.list[0].dt_txt)
     displayCurrentWeather(data)
     displayForecastWeather(data)
+
+    //call function to save the data
+    var newCityData = localStorage.getItem('cityData')
     savetols(data)
+    console.log(newCityData)
 })
 
 }
@@ -30,16 +35,30 @@ function getCityInfo() {
 //add event listener for search button click
 document.getElementById("search-button").addEventListener('click', getCityInfo)
 
+//this code adds the current temperature to the screen
 function displayCurrentWeather(data) {
+    //returns the current city name
+    var currentCityName = document.createElement('p')
+    currentCityName.textContent = data.city.name
+    var cityContainer = document.getElementById('city-container')
+    cityContainer.appendChild(currentCityName)
+
+    //returns the current city temperature
+    var currentWeather = document.createElement('p')
+    currentWeather.textContent = data.list[0].main.temp
+    var weatherContainer = document.getElementById('weather-container')
+    weatherContainer.appendChild(currentWeather)
+}
+
+function displayForecastWeather(data) {
+    var forecast = ""
 
 }
 
 function savetols(data) {
-
-}
-
-function displayForecastWeather(data) {
-
+    var input = document.getElementById('city-enter')
+    var savedData = input.value
+    localStorage.setItem('cityData', data)
 }
 
 //create conditional statements to pick specific API call portions based on what city is searched
@@ -50,8 +69,3 @@ function displayForecastWeather(data) {
 
 //create event listener for search history button and pull the api history for weather again
 
-//example code showing template literals with tutor
-var name = "Nabeel"
-//var greeting = "hello " + name + ", nice to meet you"
-var greeting = `hello ${name} nice to meet you`
-console.log(greeting)

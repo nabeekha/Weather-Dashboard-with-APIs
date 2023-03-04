@@ -11,6 +11,24 @@ fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df
     console.log(data.list[0].main.temp)
 })
 
+
+function saveToLS(data) {
+    var input = document.getElementById('city-enter')
+    var savedData = input.value
+    var currentWeather = {
+        cityName: data.city.name,
+        temperature: data.list[0].main.temp,
+        wind: data.list[0].wind.speed,
+        humidity: data.list[0].weather[0].description
+    }
+    var newHistoryButton = document.createElement('button');
+    newHistoryButton.textContent = savedData;
+    newHistoryButton.dataset.weather = JSON.stringify(currentWeather)
+    var newSearchHistory = document.getElementById('searchHistoryAdder');
+    newSearchHistory.appendChild(newHistoryButton);
+}
+ 
+
 //use search button click to return weather data 
 function getCityInfo() {
     //intake value
@@ -27,16 +45,12 @@ function getCityInfo() {
     console.log(data.list[0].dt_txt)
     displayCurrentWeather(data)
     displayForecastWeather(data)
-
+    saveToLS(data)
     //call function to save the data
-    //var newCityData = localStorage.getItem('cityData')
-    savetols(data)
+    //newCityData = localStorage.getItem('cityData')
     //console.log(newCityData)
 })
 }
-
-//add event listener for search button click
-document.getElementById("search-button").addEventListener('click', getCityInfo)
 
 //this code adds the current temperature to the screen
 function displayCurrentWeather(data) {
@@ -93,20 +107,8 @@ function displayForecastWeather(data) {
     // humidContainer.appendChild(currentHumidity)
 }
 
-//use localstorage elements to store the search history
-function savetols(data) {
-    var input = document.getElementById('city-enter')
-    var savedData = input.value
-    // localStorage.setItem('cityData', data)
-    var newHistoryButton = document.createElement('button')
-    newHistoryButton.textContent = savedData;
-    // newHistoryButton.value = 'cityData'
-    var newSearchHistory = document.getElementById('searchHistoryAdder')
-    newSearchHistory.appendChild(newHistoryButton)
-}
-
-
-//create search history buttons 
+//add event listener for search button click
+document.getElementById("search-button").addEventListener('click', getCityInfo)
 
 //create event listener for search history button and pull the api history for weather again
-
+document.getElementById("searchHistoryAdder").addEventListener('click', getCityInfo)

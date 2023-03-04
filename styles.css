@@ -1,0 +1,24 @@
+:root {
+    --font1: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.title {
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    font: 'Trebuchet MS';
+}
+
+.title-header{
+    background-color: rgb(163, 163, 255);
+}
+
+.background {
+    background-color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 768px){
+    .title-header {
+        background-color: rgb(151, 255, 189);
+    }
+}

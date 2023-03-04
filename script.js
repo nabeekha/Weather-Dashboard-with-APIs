@@ -1,6 +1,6 @@
 //test fetch function to try an individual city 
 
-var iconURL = 'http://openweathermap.org/img/wn/10d@2x.png'
+//var iconURL = 'http://openweathermap.org/img/wn/10d@2x.png'
 
 fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df5ca3d60632d1bcdcd637c38`)
 .then(response => {
@@ -18,7 +18,16 @@ function saveToLS(data) {
         cityName: data.city.name,
         temperature: data.list[0].main.temp,
         wind: data.list[0].wind.speed,
-        humidity: data.list[0].weather[0].description
+        humidity: data.list[0].weather[0].description,
+        weatherIcon: `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
+
+        //if the above code worked correctly, fetch the specific image associated with the template literal value stored in weatherIcon
+        // fetch(currentWeather.weatherIcon)
+        // .then(response => {
+        //     return response.blob();
+        // }).then(blob => {
+        //     console.log("test")
+        // })
     }
 
     var newHistoryButton = document.createElement('button');
@@ -33,8 +42,10 @@ function saveToLS(data) {
 function getCityInfo() {
     //clear previous results
 
+   //attempting to still house the previous value if the history button is pressed 
     if (searchClick) {
     document.getElementById('city-container').innerHTML = ''
+    document.getElementById('icon-container').innerHTML = ''
     document.getElementById('weather-container').innerHTML = ''
     document.getElementById('wind-container').innerHTML = ''
     document.getElementById('humidity-container').innerHTML = ''
@@ -72,6 +83,12 @@ function displayCurrentWeather(data) {
     var cityContainer = document.getElementById('city-container')
     cityContainer.appendChild(currentCityName)
 
+    //returns the current icon
+    var currentIcon = document.createElement('img')
+    currentIcon.src = `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
+    var iconContainer = document.getElementById('icon-container')
+    iconContainer.appendChild(currentIcon)
+
     //returns the current city temperature
     var currentWeather = document.createElement('p')
     currentWeather.textContent = data.list[0].main.temp
@@ -94,29 +111,6 @@ function displayCurrentWeather(data) {
 //create conditional statements to pick specific API call portions based on what city is searched
 function displayForecastWeather(data) {
     
-    // for (i = 0)
-    // var currentCityName = document.createElement('p')
-    // currentCityName.textContent = data.city.name
-    // var cityContainer = document.getElementById('city-container')
-    // cityContainer.appendChild(currentCityName)
-
-    // //returns the current city temperature
-    // var currentWeather = document.createElement('p')
-    // currentWeather.textContent = data.list[0].main.temp
-    // var weatherContainer = document.getElementById('weather-container')
-    // weatherContainer.appendChild(currentWeather)
-
-    // //returns the current wind speed
-    // var currentWind = document.createElement('p')
-    // currentWind.textContent = data.list[0].wind.speed
-    // var windContainer = document.getElementById('wind-container')
-    // windContainer.appendChild(currentWind)
-
-    // //returns the current visibity
-    // var currentHumidity = document.createElement('p')
-    // currentHumidity.textContent = data.list[0].weather[0].description
-    // var humidContainer = document.getElementById('humidity-container')
-    // humidContainer.appendChild(currentHumidity)
 }
 
 //add event listener for search button click

@@ -43,7 +43,10 @@
     background-color: rgb(171, 255, 255);
 }
 
-
+.forecast-header {
+    display: flex;
+    align-content: center;
+}
 
 @media screen and (max-width: 768px){
     .title-header {

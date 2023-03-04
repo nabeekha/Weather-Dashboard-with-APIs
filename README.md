@@ -7,7 +7,7 @@ To install this project, please go to the following code repositorty and clone t
 Repository: https://github.com/nabeekha/Weather-Dashboard-with-APIs 
 
 To use the application, please visit the live URL below:
-Live URL:
+Live URL: https://nabeekha.github.io/Weather-Dashboard-with-APIs/ 
 
 This application makes use of the Weather API at the following link: https://openweathermap.org/forecast5 
 

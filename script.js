@@ -84,6 +84,12 @@ function displayCurrentWeather(data) {
     var cityContainer = document.getElementById('city-container')
     cityContainer.appendChild(currentCityName)
 
+    //returns the current date
+    var currentDate = document.createElement('p')
+    currentDate.textContent = data.list[0].dt_txt
+    var dateContainer = document.getElementById('date-container1')
+    dateContainer.appendChild(currentDate)
+
     //returns the current icon
     var currentIcon = document.createElement('img')
     currentIcon.src = `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
@@ -111,14 +117,15 @@ function displayCurrentWeather(data) {
 
 //create conditional statements to pick specific API call portions based on what city is searched
 function displayForecastWeather(data) {
-    for (var i = 8; i < data.list.length; i += 8) {
+    var index = 1
+
+    for (var i = 8; i < data.list.length; i += 7) {
     // create elements to display the forecasted data
     var forecastDate = document.createElement('p')
     var forecastIcon = document.createElement('img')
     var forecastTemp = document.createElement('p')
     var forecastWind = document.createElement('p')
     var forecastHumidity = document.createElement('p')
-    var index = 1
 
     // set the content of the forecast elements
     forecastDate.textContent = data.list[i].dt_txt;
@@ -128,14 +135,14 @@ function displayForecastWeather(data) {
     forecastHumidity.textContent = `Humidity: ${data.list[i].main.humidity}%`
     
     //create elements for each respective container
+    var dateContainer = document.getElementById(`date-container${index+1}`)
     var iconContainer = document.getElementById(`icon-container${index+1}`)
     var weatherContainer = document.getElementById(`weather-container${index+1}`)
     var windContainer = document.getElementById(`wind-container${index+1}`)
     var humidContainer = document.getElementById(`humidity-container${index+1}`)
 
     //append results to various indeces
-    console.log(iconContainer + "  here is the iconContainer")
-    console.log(forecastIcon + "  here is the forecastIcon")
+    dateContainer.appendChild(forecastDate)
     iconContainer.appendChild(forecastIcon)
     weatherContainer.appendChild(forecastTemp)
     windContainer.appendChild(forecastWind)

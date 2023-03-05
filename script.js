@@ -7,53 +7,37 @@ fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df
     return response.json();
 }).then(data => {
     console.log(data)
-    console.log(data.city.name);
+    console.log(data.city.name)
     console.log(data.list[0].main.temp)
 })
 
 function saveToLS(data) {
     var input = document.getElementById('city-enter')
     var savedData = document.getElementById('city-enter').value
-    var currentWeather = data;
-    // var currentWeather = {
-    //     cityName: data.city.name,
-    //     temperature: data.list[0].main.temp,
-    //     wind: data.list[0].wind.speed,
-    //     humidity: data.list[0].main.humidity,
-    //     weatherIcon: `http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
+    var currentWeather = data
 
-    //     //if the above code worked correctly, fetch the specific image associated with the template literal value stored in weatherIcon
-    //     // fetch(currentWeather.weatherIcon)
-    //     // .then(response => {
-    //     //     return response.blob();
-    //     // }).then(blob => {
-    //     //     console.log("test")
-    //     // })
-    // }
 
-    var newHistoryButton = document.createElement('button');
-    newHistoryButton.textContent = savedData;
+    var newHistoryButton = document.createElement('button')
+    newHistoryButton.textContent = savedData
     newHistoryButton.dataset.cityName = JSON.stringify(currentWeather)
-    var newSearchHistory = document.getElementById('searchHistoryAdder');
-    newSearchHistory.appendChild(newHistoryButton);
+    var newSearchHistory = document.getElementById('searchHistoryAdder')
+    newSearchHistory.appendChild(newHistoryButton)
 }
- 
 
 //use search button click to return weather data 
 function getCityInfo() {
     //clear previous results
 
    //attempting to still house the previous value if the history button is pressed 
-    if (searchClick) {
     document.getElementById('city-container').innerHTML = ''
     document.getElementById('icon-container1').innerHTML = ''
     document.getElementById('weather-container1').innerHTML = ''
     document.getElementById('wind-container1').innerHTML = ''
     document.getElementById('humidity-container1').innerHTML = ''
-}else if (historyClick) {
-        currentWeather.cityName = savedData
-        newHistoryButton.dataset.cityName = JSON.stringify(currentWeather)
-    }
+// }else if (historyClick) {
+//         currentWeather.cityName = savedData
+//         newHistoryButton.dataset.cityName = JSON.stringify(currentWeather)
+//     }
 
     //intake value
     var cityEnter = document.getElementById("city-enter").value
@@ -63,10 +47,6 @@ function getCityInfo() {
     return response.json();
 }).then(data => {
     //console logs store the city name, weather and current time
-    console.log(data)
-    console.log(data.city.name);
-    console.log(data.list[0].main.temp)
-    console.log(data.list[0].dt_txt)
     displayCurrentWeather(data)
     displayForecastWeather(data)
     saveToLS(data)
@@ -118,6 +98,14 @@ function displayCurrentWeather(data) {
 //create conditional statements to pick specific API call portions based on what city is searched
 function displayForecastWeather(data) {
     var index = 1
+
+    //clear previous elements
+    document.getElementById(`date-container${index+1}`).innerHTML = ''
+    document.getElementById(`icon-container${index+1}`).innerHTML = ''
+    document.getElementById(`weather-container${index+1}`).innerHTML = ''
+    document.getElementById(`wind-container${index+1}`).innerHTML = ''
+    document.getElementById(`humidity-container${index+1}`).innerHTML = ''
+
 
     for (var i = 8; i < data.list.length; i += 7) {
     // create elements to display the forecasted data

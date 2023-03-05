@@ -1,8 +1,8 @@
-//test fetch function to try an individual city 
+//variables
+let searchHistory = [];
+let searchClicked = false
 
-//var iconURL = 'http://openweathermap.org/img/wn/10d@2x.png'
-
-fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df5ca3d60632d1bcdcd637c38`)
+fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df5ca3d60632d1bcdcd637c38`)
 .then(response => {
     return response.json();
 }).then(data => {
@@ -13,36 +13,48 @@ fetch(`http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&appid=8dbb5b7df
 
 function saveToLS(data) {
     var input = document.getElementById('city-enter')
+
     var savedData = document.getElementById('city-enter').value
     var currentWeather = data
-
-
     var newHistoryButton = document.createElement('button')
     newHistoryButton.textContent = savedData
     newHistoryButton.dataset.cityName = JSON.stringify(currentWeather)
     var newSearchHistory = document.getElementById('searchHistoryAdder')
     newSearchHistory.appendChild(newHistoryButton)
+
+    //add new history button to the searchHistory array
+    searchHistory.push(newHistoryButton.textContent)
 }
 
 //use search button click to return weather data 
 function getCityInfo() {
     //clear previous results
-
-   //attempting to still house the previous value if the history button is pressed 
     document.getElementById('city-container').innerHTML = ''
+    document.getElementById('date-container1').innerHTML = ''
     document.getElementById('icon-container1').innerHTML = ''
     document.getElementById('weather-container1').innerHTML = ''
     document.getElementById('wind-container1').innerHTML = ''
     document.getElementById('humidity-container1').innerHTML = ''
-// }else if (historyClick) {
-//         currentWeather.cityName = savedData
-//         newHistoryButton.dataset.cityName = JSON.stringify(currentWeather)
-//     }
 
-    //intake value
-    var cityEnter = document.getElementById("city-enter").value
+    //set condtional to see whether the search button or history button is clicked
+
+    //can't get the loop to work successfully to pick the right value 
+    // if (searchClicked)
+    // {
+    // //intake value
+    // var cityEnter = document.getElementById("city-enter").value
+    // } else {
+    //     var cityEnter = ''
+    //     searchHistory.forEach((item) => {
+    //         if (newHistoryButton.textContent == item.query) {
+    //             cityEnter = searchHistory[item].textContent
+    //         }
+    //     })
+    // }
+
+
     //use backticks to use Template Literal and create a variable that you can use 
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${cityEnter}&appid=8dbb5b7df5ca3d60632d1bcdcd637c38`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityEnter}&appid=8dbb5b7df5ca3d60632d1bcdcd637c38`)
 .then(response => {
     return response.json();
 }).then(data => {
@@ -50,9 +62,6 @@ function getCityInfo() {
     displayCurrentWeather(data)
     displayForecastWeather(data)
     saveToLS(data)
-    //call function to save the data
-    //newCityData = localStorage.getItem('cityData')
-    //console.log(newCityData)
 })
 }
 
@@ -99,14 +108,6 @@ function displayCurrentWeather(data) {
 function displayForecastWeather(data) {
     var index = 1
 
-    //clear previous elements
-    document.getElementById(`date-container${index+1}`).innerHTML = ''
-    document.getElementById(`icon-container${index+1}`).innerHTML = ''
-    document.getElementById(`weather-container${index+1}`).innerHTML = ''
-    document.getElementById(`wind-container${index+1}`).innerHTML = ''
-    document.getElementById(`humidity-container${index+1}`).innerHTML = ''
-
-
     for (var i = 8; i < data.list.length; i += 7) {
     // create elements to display the forecasted data
     var forecastDate = document.createElement('p')
@@ -129,6 +130,13 @@ function displayForecastWeather(data) {
     var windContainer = document.getElementById(`wind-container${index+1}`)
     var humidContainer = document.getElementById(`humidity-container${index+1}`)
 
+    //clear previous elements
+    document.getElementById(`date-container${index+1}`).innerHTML = ''
+    document.getElementById(`icon-container${index+1}`).innerHTML = ''
+    document.getElementById(`weather-container${index+1}`).innerHTML = ''
+    document.getElementById(`wind-container${index+1}`).innerHTML = ''
+    document.getElementById(`humidity-container${index+1}`).innerHTML = ''
+
     //append results to various indeces
     dateContainer.appendChild(forecastDate)
     iconContainer.appendChild(forecastIcon)
@@ -142,10 +150,17 @@ function displayForecastWeather(data) {
 
 //add event listener for search button click
 var searchClick = document.getElementById("search-button")
+searchClick.addEventListener('click', () => {
+    searchClicked = true
+})
 searchClick.addEventListener('click', getCityInfo)
+
 
 //create event listener for search history button and pull the api history for weather again
 var historyClick = document.getElementById("searchHistoryAdder")
+historyClick.addEventListener('click', () => {
+    searchClicked = false
+})
 historyClick.addEventListener('click', getCityInfo)
 
 
